@@ -1,0 +1,240 @@
+/* =============================================
+   Testimonials.css (v3) — light editorial, names first
+   Same class names as before: only the CSS changes, no JSX edits needed.
+   Sits between the dark Hero and the dark Contact, so this one is light.
+   ============================================= */
+
+.testimonials {
+  background: var(--color-cream);
+  color: var(--color-dark);
+  padding: var(--section-pad, 6rem) var(--gutter, 2rem);
+}
+
+.testimonials__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.testimonials .section-label {
+  color: var(--color-gold-text);
+}
+
+.testimonials__heading {
+  max-width: 16ch;
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl, 3.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--color-black);
+}
+
+/* ---- Row: arrows top-right, cards below ---- */
+.testimonials__row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas:
+    ". prev next"
+    "grid grid grid";
+  column-gap: var(--sp-3, 0.75rem);
+  align-items: center;
+  margin-top: var(--sp-10, 2.5rem);
+}
+
+.testimonials__arrow {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-charcoal);
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: var(--color-dark);
+  transition: background var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+}
+
+.testimonials__arrow--prev { grid-area: prev; }
+.testimonials__arrow--next { grid-area: next; }
+
+.testimonials__arrow:hover {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+.testimonials__arrow:focus-visible,
+.testimonials__dot:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* ---- Columns: divided by thin vertical lines, first review gets more room ---- */
+.testimonials__grid {
+  grid-area: grid;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  margin-top: var(--sp-12, 3rem);
+  align-items: stretch;
+}
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--sp-8, 2rem);
+  animation: cardIn 0.6s var(--ease-out, ease) both;
+}
+
+.testimonial-card:first-child {
+  padding-left: 0;
+}
+
+.testimonial-card:last-child {
+  padding-right: 0;
+}
+
+.testimonial-card + .testimonial-card {
+  border-left: 1px solid var(--color-border);
+  animation-delay: 0.08s;
+}
+
+.testimonial-card:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* The decorative quote mark is dropped */
+.testimonial-card__quote {
+  display: none;
+}
+
+/* Couple name comes first, as the title of the review */
+.testimonial-card__footer {
+  order: -1;
+  margin-bottom: var(--sp-6, 1.5rem);
+  padding: 0 0 var(--sp-5, 1.25rem);
+  border-top: none;
+  position: relative;
+}
+
+.testimonial-card__footer::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.testimonial-card__couple {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl, 1.75rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.15;
+  color: var(--color-black);
+}
+
+/* Review text in the UI sans: reads as a quiet paragraph under the name */
+.testimonial-card__body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-base, 0.9375rem);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.85;
+  color: var(--color-mid-gray);
+}
+
+.testimonial-card:first-child .testimonial-card__body {
+  font-size: var(--fs-md, 1rem);
+  color: var(--color-charcoal);
+}
+
+/* ---- Page indicators: short lines, left aligned ---- */
+.testimonials__dots {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--sp-2, 0.5rem);
+  margin-top: var(--sp-16, 4rem);
+}
+
+.testimonials__dot {
+  position: relative;
+  width: 2.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  transform: none;
+}
+
+.testimonials__dot::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto 0;
+  height: 2px;
+  transform: translateY(-50%);
+  background: var(--color-border);
+  transition: background var(--transition-base);
+}
+
+.testimonials__dot:hover::after {
+  background: var(--color-light-gray);
+}
+
+.testimonials__dot--active,
+.testimonials__dot--active:hover {
+  background: transparent;
+  transform: none;
+}
+
+.testimonials__dot--active::after {
+  background: var(--color-gold-deep);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .testimonials__grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-10, 2.5rem);
+  }
+
+  .testimonial-card,
+  .testimonial-card:first-child,
+  .testimonial-card:last-child {
+    padding: 0;
+  }
+
+  .testimonial-card + .testimonial-card {
+    padding-top: var(--sp-10, 2.5rem);
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonials__heading {
+    max-width: none;
+  }
+
+  .testimonials__arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-card {
+    animation: none !important;
+  }
+}

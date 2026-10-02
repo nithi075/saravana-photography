@@ -1,0 +1,184 @@
+/* =============================================
+   Contact.css (v2)
+   Left-aligned hero to match the new Hero, dark Instagram strip below.
+   Same class names as before: only the CSS changes, no JSX edits needed.
+   ============================================= */
+
+/* ---- Hero image block ---- */
+.contact__hero {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  height: 75svh;
+  min-height: 520px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;           /* content sits at the bottom-left */
+  justify-content: flex-start;
+  background: var(--color-black);
+}
+
+.contact__hero-img-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.contact__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 10s linear;
+}
+
+.contact__hero:hover .contact__hero-img {
+  transform: scale(1.04);
+}
+
+.contact__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(22, 21, 19, 0.88) 0%, rgba(22, 21, 19, 0) 60%),
+    linear-gradient(to right, rgba(22, 21, 19, 0.5) 0%, rgba(22, 21, 19, 0) 55%);
+}
+
+.contact__hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 720px;
+  padding: 0 var(--gutter) clamp(var(--sp-12), 9vh, var(--sp-24));
+  text-align: left;
+}
+
+.contact__heading {
+  margin-bottom: var(--sp-5);
+  font-family: var(--font-display);
+  font-size: var(--fs-5xl);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+}
+
+.contact__subtext {
+  max-width: 46ch;
+  margin-bottom: var(--sp-8);
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- Instagram block: dark strip, handle in display serif ---- */
+.contact__instagram {
+  background: var(--color-black);
+  padding: var(--sp-16) var(--gutter);
+  text-align: left;
+  border-top: 1px solid rgba(198, 160, 90, 0.4);
+}
+
+.contact__instagram-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4) var(--sp-8);
+}
+
+.contact__instagram-label {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.contact__instagram-handle {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-gold-light);
+  transition: color var(--transition-base);
+}
+
+.contact__instagram-handle::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0.25);
+  transform-origin: left;
+  transition: transform var(--transition-base);
+}
+
+.contact__instagram-handle:hover {
+  color: var(--color-white);
+}
+
+.contact__instagram-handle:hover::after {
+  transform: scaleX(1);
+}
+
+.contact__instagram-handle:focus-visible {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 6px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .contact__hero {
+    height: 65vh;
+    height: 65svh;
+  }
+
+  .contact__heading {
+    font-size: var(--fs-4xl);
+  }
+
+  .contact__instagram-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact__hero {
+    height: 60vh;
+    height: 60svh;
+    min-height: 440px;
+  }
+
+  .contact__heading {
+    font-size: var(--fs-3xl);
+  }
+
+  .contact__subtext {
+    font-size: var(--fs-sm);
+  }
+
+  .contact__instagram-handle {
+    font-size: var(--fs-2xl);
+  }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .contact__hero-img,
+  .contact__instagram-handle::after {
+    transition: none !important;
+  }
+}

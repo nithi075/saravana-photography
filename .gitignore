@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+*.mp4
+*.mov
+*.avi
+*.zip
+*.rar

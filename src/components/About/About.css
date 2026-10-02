@@ -1,0 +1,171 @@
+/* =============================================
+   About.css (v2)
+   Text on the left, media on the right, offset outline frame behind the videos.
+   Same class names as before: only the CSS changes, no JSX edits needed.
+   ============================================= */
+
+.about {
+  background: var(--color-cream);
+  padding: var(--section-pad) var(--gutter);
+}
+
+.about__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(var(--sp-10), 6vw, var(--sp-24));
+  align-items: center;
+}
+
+/* ---- Text (first visually, whatever the DOM order) ---- */
+.about__text {
+  order: 1;
+  padding-left: 0;
+}
+
+.about__text .section-label {
+  color: var(--color-gold-text);
+}
+
+.about__heading {
+  margin-bottom: var(--sp-6);
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--color-black);
+}
+
+.about__body {
+  max-width: 46ch;
+  margin-bottom: var(--sp-10);
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--color-mid-gray);
+}
+
+.about__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.about__cta-arrow {
+  display: inline-block;
+  transition: transform var(--transition-base);
+}
+
+.about__cta:hover .about__cta-arrow {
+  transform: translateX(6px);
+}
+
+/* ---- Media column ---- */
+.about__images {
+  order: 2;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+  align-items: start;
+}
+
+.about__img-primary,
+.about__img-secondary {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: var(--color-off-white);
+}
+
+.about__img-primary {
+  grid-column: 1 / 2;
+  margin-top: var(--sp-16);        /* primary starts lower ... */
+}
+
+.about__img-secondary {
+  grid-column: 2 / 3;
+  margin-top: 0;                   /* ... secondary starts higher: a diagonal rhythm */
+}
+
+.about__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  transition: transform var(--transition-slower);
+}
+
+.about__img-primary:hover .about__video,
+.about__img-secondary:hover .about__video {
+  transform: scale(1.04);
+}
+
+/* Offset outline sitting behind the videos, instead of a small corner mark */
+.about__frame {
+  position: absolute;
+  z-index: 0;
+  top: calc(var(--sp-6) * -1);
+  right: calc(var(--sp-6) * -1);
+  bottom: var(--sp-10);
+  left: 30%;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--color-gold);
+  pointer-events: none;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .about__container {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-10);
+  }
+
+  .about__heading {
+    font-size: var(--fs-3xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .about__container {
+    grid-template-columns: 1fr;
+  }
+
+  /* media first on mobile, text below */
+  .about__images {
+    order: 1;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .about__text {
+    order: 2;
+    text-align: left;
+  }
+
+  .about__frame {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .about__img-primary {
+    margin-top: var(--sp-8);
+  }
+
+  .about__heading {
+    font-size: var(--fs-3xl);
+  }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .about__video,
+  .about__cta-arrow {
+    transition: none !important;
+  }
+}
