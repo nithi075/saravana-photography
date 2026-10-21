@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import './Instagram.css';
+import './instagram.css';
 
 import gallery1 from '../../assets/gal1.jpeg';
 import gallery2 from '../../assets/gal2.jpeg';
